@@ -1,22 +1,22 @@
-"use client";
+"use client"
 
-import React from "react";
-import { useForm, FormProvider } from "react-hook-form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import React from "react"
+import { useForm, FormProvider } from "react-hook-form"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 const Signup = () => {
-  const methods = useForm();
+  const methods = useForm()
   const {
     handleSubmit,
     register,
     formState: { errors },
-  } = methods;
+  } = methods
 
   const onSubmit = (data) => {
-    console.log(data);
-  };
+    console.log(data)
+  }
 
   return (
     <section className="flex flex-col max-w-md w-full space-y-4 section">
@@ -29,7 +29,7 @@ const Signup = () => {
           <Input
             type="text"
             label="Username"
-            className="focus:outline-none focus:border-light-primary focus:ring-2 focus:ring-light-primary dark:focus:ring-dark-primary dark:focus:border-dark-primary "
+            className="border border-light-primary text-light-primary dark:border-dark-primary dark:text-dark-primary focus:outline-none focus:border-light-primary focus:ring-2 focus:ring-light-primary dark:focus:ring-dark-primary dark:focus:border-dark-primary "
             {...register("username", {
               required: "Username is required",
               minLength: {
@@ -42,7 +42,7 @@ const Signup = () => {
           <Input
             type="email"
             label="Email"
-            className="focus:outline-none focus:border-light-primary focus:ring-2 focus:ring-light-primary dark:focus:ring-dark-primary dark:focus:border-dark-primary "
+            className="border border-light-primary text-light-primary dark:border-dark-primary dark:text-dark-primary focus:outline-none focus:border-light-primary focus:ring-2 focus:ring-light-primary dark:focus:ring-dark-primary dark:focus:border-dark-primary "
             {...register("email", {
               required: "Email is required",
               pattern: {
@@ -55,7 +55,7 @@ const Signup = () => {
           <Input
             type="password"
             label="Password"
-            className="focus:outline-none focus:border-light-primary focus:ring-2 focus:ring-light-primary dark:focus:ring-dark-primary dark:focus:border-dark-primary "
+            className="border border-light-primary text-light-primary dark:border-dark-primary dark:text-dark-primary focus:outline-none focus:border-light-primary focus:ring-2 focus:ring-light-primary dark:focus:ring-dark-primary dark:focus:border-dark-primary "
             {...register("password", {
               required: "Password is required",
               minLength: {
@@ -65,19 +65,25 @@ const Signup = () => {
             })}
             error={errors.password}
           />
-          <Button type="submit" className="w-full">
+          <Button
+            type="submit"
+            className="w-full"
+          >
             Sign Up
           </Button>
         </form>
         <small className="text-center">
           Already have an account?{" "}
-          <Link href="/signin" className="font-semibold hover:font-bold">
+          <Link
+            href="/signin"
+            className="font-semibold hover:font-bold"
+          >
             Sign In
           </Link>
         </small>
       </FormProvider>
     </section>
-  );
-};
+  )
+}
 
-export default Signup;
+export default Signup

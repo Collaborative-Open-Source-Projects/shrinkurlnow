@@ -1,34 +1,28 @@
-"use client";
-import { handleApiResponse } from "@/lib/apiResponseHandler";
-import { toastTypes } from "@/lib/constants";
-import { UrlInputSchema } from "@/lib/schema";
-import { showToast } from "@/lib/toastHandler";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { Button } from "../ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "../ui/form";
-import { Input } from "../ui/input";
+"use client"
+import { handleApiResponse } from "@/lib/apiResponseHandler"
+import { toastTypes } from "@/lib/constants"
+import { UrlInputSchema } from "@/lib/schema"
+import { showToast } from "@/lib/toastHandler"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useState } from "react"
+import { useForm } from "react-hook-form"
+import { Button } from "../ui/button"
+import { Form, FormControl, FormField, FormItem, FormMessage } from "../ui/form"
+import { Input } from "../ui/input"
 
 function UrlInputForm({ handleDisplayShortUrl }) {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   const form = useForm({
     resolver: zodResolver(UrlInputSchema),
     defaultValues: {
       longUrl: "",
     },
-  });
+  })
 
   const onSubmit = async (values) => {
     try {
-      setLoading(true);
+      setLoading(true)
       const response = await fetch("/api/shorten-url", {
         method: "POST",
         headers: {
@@ -37,25 +31,25 @@ function UrlInputForm({ handleDisplayShortUrl }) {
         body: JSON.stringify({
           long_url: values.longUrl,
         }),
-      });
-      const result = await handleApiResponse(response);
+      })
+      const result = await handleApiResponse(response)
 
       if (result.success) {
         handleDisplayShortUrl({
           shortUrl: result.data.short_url,
           longUrl: values.longUrl,
-        });
+        })
 
-        form.reset();
+        form.reset()
       } else {
-        throw new Error(result.message);
+        throw new Error(result.message)
       }
     } catch (error) {
-      showToast(toastTypes.ERROR, error.message);
+      showToast(toastTypes.ERROR, error.message)
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   return (
     <Form {...form}>
@@ -72,7 +66,7 @@ function UrlInputForm({ handleDisplayShortUrl }) {
                 <Input
                   type="text"
                   placeholder="Please enter a URL"
-                  className="focus:outline-none focus:border-light-primary focus:ring-2 focus:ring-light-primary dark:focus:ring-dark-primary dark:focus:border-dark-primary "
+                  className="border border-light-primary text-light-primary dark:border-dark-primary dark:text-dark-primary focus:outline-none focus:border-light-primary focus:ring-2 focus:ring-light-primary dark:focus:ring-dark-primary dark:focus:border-dark-primary "
                   {...field}
                 />
               </FormControl>
@@ -89,7 +83,7 @@ function UrlInputForm({ handleDisplayShortUrl }) {
         </Button>
       </form>
     </Form>
-  );
+  )
 }
 
-export default UrlInputForm;
+export default UrlInputForm
