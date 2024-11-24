@@ -15,6 +15,24 @@ const RedirectPage = ({ params }) => {
       if (response.ok) {
         const { longUrl } = await response.json();
         router.push(longUrl);
+
+        const dashboardResponse = await fetch("/api/dashboard", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            shortcode: shortcode,
+          }),
+        });
+
+        if (dashboardResponse.ok) {
+          const json = await response.json();
+          console.log(json);
+        } else {
+          const text = await response.text();
+          throw new Error(`Error: ${dashboardResponse.status} - ${text}`);
+        }
       } else {
         alert('Shortcode not found');
         router.push('/');
