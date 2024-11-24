@@ -34,8 +34,6 @@ export async function POST(req) {
     
     const created_at = currentDate.toISOString(); 
     const expiry_at = expiryDate.toISOString();
-    console.log(created_at);
-    console.log(expiry_at)
 
     // Store details in table
     const { data, error } = await supabase
