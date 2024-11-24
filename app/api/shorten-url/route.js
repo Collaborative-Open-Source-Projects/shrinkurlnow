@@ -43,7 +43,9 @@ export async function POST(req) {
           long_url: long_url, 
           short_url: short_url,
           created_at: created_at,
-          expiry_at: expiry_at
+          expiry_at: expiry_at,
+          user_id: 3,
+          views: 0
         }
       ])
 
