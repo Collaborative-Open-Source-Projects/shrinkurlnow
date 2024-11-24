@@ -25,14 +25,28 @@ export async function POST(req) {
       );
     }
 
-    // Shorten URL
+    // Shorten URL and other columns
     const short_url = nanoid(8)
+    const currentDate = new Date(); 
+
+    const expiryDate = new Date(currentDate);
+    expiryDate.setDate(currentDate.getDate() + 7);
+    
+    const created_at = currentDate.toISOString(); 
+    const expiry_at = expiryDate.toISOString();
+    console.log(created_at);
+    console.log(expiry_at)
 
     // Store details in table
     const { data, error } = await supabase
       .from('url_pair')
       .insert([
-        { long_url: long_url, short_url: short_url }
+        { 
+          long_url: long_url, 
+          short_url: short_url,
+          created_at: created_at,
+          expiry_at: expiry_at
+        }
       ])
 
     if (error) {
