@@ -13,7 +13,7 @@ const Navbar = () => {
   const isSigninPage = pathname === "/signin";
 
   return (
-    <header className="w-full h-[5rem] flex items-center justify-between fixed top-0 left-0 right-0 section bg-[url('/light.png')] dark:bg-[url('/dark.png')] bg-cover"  >    <Logo />
+    <header className="w-full h-[5rem] flex items-center justify-between fixed top-0 left-0 right-0 section "  >    <Logo />
       <div className="flex items-center justify-center gap-5">
         <ThemeSwitcher />
         <Link href={isSigninPage ? "/signup" : "/signin"}>
